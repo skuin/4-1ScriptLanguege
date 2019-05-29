@@ -92,8 +92,12 @@ def Start():
     button14 = Button(window, text="제주", command=lambda: HospitalInfo('제주'))
     button14.place(x=310+20,y=530)
 
-    txt = Entry(window)
-    txt.place(x=450,y=10, width=300, height= 570)
+    photo = PhotoImage(file="hospital.gif")
+    imageLabel = Label(window, image=photo)
+    imageLabel.place(x= 60, y=200)
+
+    hosInfo = Listbox(window)
+    hosInfo.place(x=400, y=10, width=380, height=570)
 
     window.mainloop()
 
@@ -138,7 +142,8 @@ def HospitalInfo(text):
 
     count = len(sidoCdList)
     num = 1
-
+    num2 = 1
+    index = 0
     for i in range (0, count):
         if sidoList[i] == text:
             print('[ ' + str(num) + ' ]')
@@ -151,6 +156,38 @@ def HospitalInfo(text):
             print('===========================================================')
             num+=1
 
+    #window = Tk()
+    hosInfo = Listbox(window)
+    hosInfo.place(x=400, y=10, width=380, height=570)
+
+    for i in range (0, count):
+        if sidoList[i] == text:
+            hosInfo.insert(index, '[ ' + str(num2) + ' ]')
+            index += 1
+            hosInfo.insert(index, '병원이름: '+ hosNameList[i])
+            index+=1
+            hosInfo.insert(index, '주소:' + hosAddrList[i])
+            index+=1
+            hosInfo.insert(index, '병원종류: '+ clCdNmList[i])
+            index += 1
+            hosInfo.insert(index, '우편번호: ' + postNoList[i])
+            index += 1
+            hosInfo.insert(index, '전화번호: ' + telnoList[i])
+            index += 1
+            hosInfo.insert(index, '홈페이지: ' + hospUrl[i])
+            index += 1
+            hosInfo.insert(index, '===========================================================')
+            index += 1
+            num2+=1
+
+
+
+    #hosInfo.insert(1, hosNameList[0])
+    #hosInfo.insert(2, hosAddrList[0])
+
+    #hosInfo.insert(0, )
+
+    pass
 
 Start()
 HospitalInfo('전북')
