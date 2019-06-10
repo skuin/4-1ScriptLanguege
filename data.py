@@ -10,24 +10,23 @@ from xml.etree import ElementTree
 from tkinter import *
 from tkinter import ttk
 
-def PrintData():
-    ServiceKey = "ybnIgV0VKqAjxonAPCPFPvTtRAKhhARpuEKCRgD7Lx5UNuNc%2B56Bg2OEbpi97TdsSizzYpAetBB1TWTyiO2dvQ%3D%3D"
-    url = "http://apis.data.go.kr/B551182/hospInfoService/getHospBasisList?pageNo=1&numOfRows=10&ServiceKey=" + ServiceKey
+# 정신과
+# https://openapi.gg.go.kr/Hosptlevaltnpsychs?Key=87b45899e7ae4c1abd87299b4ef3ce04&pIndex=1&pSize=100
+# 천식
+# https://openapi.gg.go.kr/Hosptlevaltnast?Key=87b45899e7ae4c1abd87299b4ef3ce04&pIndex=1&pSize=100
+# 폐렴
+# https://openapi.gg.go.kr/Hosptlevaltnpen?Key=87b45899e7ae4c1abd87299b4ef3ce04&pIndex=1&pSize=100
+# 혈액투석
+# https://openapi.gg.go.kr/Hosptlevaltnboldi?Key=87b45899e7ae4c1abd87299b4ef3ce04&pIndex=1&pSize=100
+# 폐암
+# https://openapi.gg.go.kr/Hosptlevaltnlunc?Key=87b45899e7ae4c1abd87299b4ef3ce04&pIndex=1&pSize=100
+# 관상동맥우회술
+# https://openapi.gg.go.kr/Hosptlevaltncorarby?Key=87b45899e7ae4c1abd87299b4ef3ce04&pIndex=1&pSize=100
+# 대장암
+# https://openapi.gg.go.kr/Hosptlevaltnlgsnc?Key=87b45899e7ae4c1abd87299b4ef3ce04&pIndex=1&pSize=100
 
-    response = urllib.request.urlopen(url)
-    decoding = str(response.read().decode("utf-8"))
-    # print(decoding)
-    # dict = json.loads(decoding)
-    pprint(decoding)
-    pass
-
-def MakeXML():
-    url = "http://apis.data.go.kr/B551182/hospInfoService/getHospBasisList?pageNo=1&numOfRows=50&ServiceKey=ybnIgV0VKqAjxonAPCPFPvTtRAKhhARpuEKCRgD7Lx5UNuNc%2B56Bg2OEbpi97TdsSizzYpAetBB1TWTyiO2dvQ%3D%3D"
-    data = urllib.request.urlopen(url).read()
-    f = open("hospital.xml", "wb")
-    f.write(data)
-    f.close()
-    pass
+# 약처방비용
+# https://openapi.gg.go.kr/Hosptlevaltnmcex?Key=87b45899e7ae4c1abd87299b4ef3ce04&pIndex=1&pSize=100
 
 def Start():
     global window
@@ -44,10 +43,10 @@ def Start():
     label = Label(window, text = '지역선택')
     label.place(x=180,y=470)
 
-    button = Button(window, text="서울", command= lambda : HospitalInfo('서울'))
+    button = Button(window, text="수원", command= lambda : HospitalInfo('수원시'))
     button.place(x=30+20,y=500)
 
-    button2 = Button(window, text="부산", command=lambda: HospitalInfo('부산'))
+    button2 = Button(window, text="시흥", command=lambda: HospitalInfo('시흥시'))
     button2.place(x=70+20,y=500)
 
     button3 = Button(window, text="경기", command=lambda: HospitalInfo('경기'))
@@ -109,76 +108,58 @@ def init():
 #init()
 
 def HospitalInfo(text):
-    tree = ElementTree.parse("hospital.xml")     # 병원 정보를 xml 형식으로 파싱
-    root = tree.getroot()                        # xml의 root 요소를 추출
+    mentalUrl = "https://openapi.gg.go.kr/Hosptlevaltnpsychs?Key=87b45899e7ae4c1abd87299b4ef3ce04&pIndex=2&pSize=100"
+    res = urllib.request.urlopen(mentalUrl)
+    decoding = str(res.read().decode("utf-8"))
+    # pprint(decoding)
 
-    # 시도 코드
-    # 서울 11 부산 21 대구 22 인천 23 광주 24 대전 25 울산 26 세종 29
-    # 경기 31 강원 32 충북 33 충남 34 전북 35 전남 36 경북 37 경남 38 제주 39
+    data = urllib.request.urlopen(mentalUrl).read()
+    f = open("hospitalGrade.xml", "wb")
+    f.write(data)
+    f.close()
 
-    sidoCdList = []     # 시도코드
-    hosAddrList = []    # 병원주소
-    hosNameList = []    # 병원이름
-    clCdNmList = []     # 종별코드 ( 종합병원 등 )
-    sidoList = []       # 시도
-    sgguList = []       # 시군구
-    emdongList = []     # 읍면동
-    postNoList = []     # 우편번호
-    telnoList = []      # 전화번호
-    hospUrl = []        # 홈페이지
+    sigun_Name = []
+    hos_Name = []
+    div_Name = []
+    Grade = []
+    addr = []
+    addr_Num = []
 
-    for a in root.findall('.//item'):
-        dic = {"addr": a.findtext("addr"), "name": a.findtext("yadmNm")}
-        sidoCdList.append(a.findtext("sidoCd"))
-        hosAddrList.append(a.findtext("addr"))
-        hosNameList.append(a.findtext("yadmNm"))
-        clCdNmList.append(a.findtext("clCdNm"))
-        sidoList.append(a.findtext("sidoCdNm"))
-        sgguList.append(a.findtext("sgguCdNm"))
-        emdongList.append(a.findtext("emdongNm"))
-        postNoList.append(a.findtext("postNo"))
-        telnoList.append(a.findtext("telno"))
-        hospUrl.append(a.findtext("hospUrl"))
+    tree = ElementTree.parse("hospitalGrade.xml")
+    root = tree.getroot()
 
-    count = len(sidoCdList)
-    num = 1
-    num2 = 1
+    for a in root.findall('.//row'):
+        sigun_Name.append(a.findtext("SIGUN_NM"))
+        hos_Name.append(a.findtext("INST_NM"))
+        div_Name.append(a.findtext("DIV_NM"))
+        Grade.append(a.findtext("GRAD"))
+        addr.append(a.findtext("REFINE_ROADNM_ADDR"))
+        addr_Num.append(a.findtext("REFINE_ZIP_CD"))
+
+    count = len(sigun_Name)
     index = 0
-    for i in range (0, count):
-        if sidoList[i] == text:
-            print('[ ' + str(num) + ' ]')
-            print(hosNameList[i])
-            print(hosAddrList[i])
-            print(clCdNmList[i])
-            print(postNoList[i])
-            print(telnoList[i])
-            print(hospUrl[i])
-            print('===========================================================')
-            num+=1
-
+    num = 1
     #window = Tk()
     hosInfo = Listbox(window)
     hosInfo.place(x=400, y=10, width=380, height=570)
 
     for i in range (0, count):
-        if sidoList[i] == text:
-            hosInfo.insert(index, '[ ' + str(num2) + ' ]')
+        if sigun_Name[i] == text:
+            hosInfo.insert(index, '[ ' + str(num) + ' ]')
             index += 1
-            hosInfo.insert(index, '병원이름: '+ hosNameList[i])
-            index+=1
-            hosInfo.insert(index, '주소:' + hosAddrList[i])
-            index+=1
-            hosInfo.insert(index, '병원종류: '+ clCdNmList[i])
+            hosInfo.insert(index, '병원이름: '+ hos_Name[i])
+            index +=1
+            hosInfo.insert(index, '평가내역: ' + div_Name[i])
             index += 1
-            hosInfo.insert(index, '우편번호: ' + postNoList[i])
+            hosInfo.insert(index, '등급: ' + Grade[i])
             index += 1
-            hosInfo.insert(index, '전화번호: ' + telnoList[i])
-            index += 1
-            hosInfo.insert(index, '홈페이지: ' + hospUrl[i])
+            hosInfo.insert(index, '주소:' + addr[i])
+            index +=1
+            hosInfo.insert(index, '우편번호: ' + addr_Num[i])
             index += 1
             hosInfo.insert(index, '===========================================================')
             index += 1
-            num2+=1
+            num += 1
 
 
 
@@ -190,5 +171,4 @@ def HospitalInfo(text):
     pass
 
 Start()
-HospitalInfo('전북')
-
+#HospitalInfo("수원시")
