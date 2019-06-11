@@ -334,11 +334,11 @@ def HospitalInfoPaeryeom(text):
         if sigun_Name[i] == text:
             hosInfo.insert(index, '[ ' + str(num) + ' ]')
             index += 1
+            hosInfo.insert(index, '등급: ' + Grade[i])
+            index += 1
             hosInfo.insert(index, '병원이름: '+ hos_Name[i])
             index +=1
             hosInfo.insert(index, '평가내역: ' + div_Name[i])
-            index += 1
-            hosInfo.insert(index, '등급: ' + Grade[i])
             index += 1
             hosInfo.insert(index, '주소:' + addr[i])
             index +=1
@@ -408,11 +408,11 @@ def HospitalInfoCehnsick(text):
         if sigun_Name[i] == text:
             hosInfo.insert(index, '[ ' + str(num) + ' ]')
             index += 1
+            hosInfo.insert(index, '등급: ' + Grade[i])
+            index += 1
             hosInfo.insert(index, '병원이름: '+ hos_Name[i])
             index +=1
             hosInfo.insert(index, '평가내역: ' + div_Name[i])
-            index += 1
-            hosInfo.insert(index, '등급: ' + Grade[i])
             index += 1
             hosInfo.insert(index, '주소:' + addr[i])
             index +=1
@@ -482,11 +482,11 @@ def HospitalInfoBlood(text):
         if sigun_Name[i] == text:
             hosInfo.insert(index, '[ ' + str(num) + ' ]')
             index += 1
+            hosInfo.insert(index, '등급: ' + Grade[i])
+            index += 1
             hosInfo.insert(index, '병원이름: '+ hos_Name[i])
             index +=1
             hosInfo.insert(index, '평가내역: ' + div_Name[i])
-            index += 1
-            hosInfo.insert(index, '등급: ' + Grade[i])
             index += 1
             hosInfo.insert(index, '주소:' + addr[i])
             index +=1
@@ -556,11 +556,11 @@ def HospitalInfopaecancer(text):
         if sigun_Name[i] == text:
             hosInfo.insert(index, '[ ' + str(num) + ' ]')
             index += 1
+            hosInfo.insert(index, '등급: ' + Grade[i])
+            index += 1
             hosInfo.insert(index, '병원이름: '+ hos_Name[i])
             index +=1
             hosInfo.insert(index, '평가내역: ' + div_Name[i])
-            index += 1
-            hosInfo.insert(index, '등급: ' + Grade[i])
             index += 1
             hosInfo.insert(index, '주소:' + addr[i])
             index +=1
@@ -629,11 +629,11 @@ def HospitalInfoGwansang(text):
         if sigun_Name[i] == text:
             hosInfo.insert(index, '[ ' + str(num) + ' ]')
             index += 1
+            hosInfo.insert(index, '등급: ' + Grade[i])
+            index += 1
             hosInfo.insert(index, '병원이름: '+ hos_Name[i])
             index +=1
             hosInfo.insert(index, '평가내역: ' + div_Name[i])
-            index += 1
-            hosInfo.insert(index, '등급: ' + Grade[i])
             index += 1
             hosInfo.insert(index, '주소:' + addr[i])
             index +=1
@@ -704,11 +704,11 @@ def HospitalInfoDaejangcanser(text):
         if sigun_Name[i] == text:
             hosInfo.insert(index, '[ ' + str(num) + ' ]')
             index += 1
+            hosInfo.insert(index, '등급: ' + Grade[i])
+            index += 1
             hosInfo.insert(index, '병원이름: '+ hos_Name[i])
             index +=1
             hosInfo.insert(index, '평가내역: ' + div_Name[i])
-            index += 1
-            hosInfo.insert(index, '등급: ' + Grade[i])
             index += 1
             hosInfo.insert(index, '주소:' + addr[i])
             index +=1
@@ -778,11 +778,11 @@ def HospitalInfoDraw(text):
         if sigun_Name[i] == text:
             hosInfo.insert(index, '[ ' + str(num) + ' ]')
             index += 1
+            hosInfo.insert(index, '등급: ' + Grade[i])
+            index += 1
             hosInfo.insert(index, '병원이름: '+ hos_Name[i])
             index +=1
             hosInfo.insert(index, '평가내역: ' + div_Name[i])
-            index += 1
-            hosInfo.insert(index, '등급: ' + Grade[i])
             index += 1
             hosInfo.insert(index, '주소:' + addr[i])
             index +=1
